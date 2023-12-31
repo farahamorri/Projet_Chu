@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Tableau avec prénoms et dates aléatoires</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 50%;
+      margin: 20px auto;
+    }
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+
+<table>
+  <thead>
+    <tr>
+      <th>Prénom</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody id="tableBody">
+    <!-- Le contenu du tableau sera généré par JavaScript -->
+  </tbody>
+</table>
+
+<script>
+  function genererDatesAleatoires() {
+    const dates = [];
+    for (let i = 0; i < 10; i++) {
+      const jour = Math.floor(Math.random() * 28) + 1; // Jour aléatoire entre 1 et 28
+      const mois = Math.floor(Math.random() * 12) + 1; // Mois aléatoire entre 1 et 12
+      const annee = Math.floor(Math.random() * (2023 - 1970 + 1)) + 1970; // Année aléatoire entre 1970 et 2023
+      const date = `${jour.toString().padStart(2, '0')}/${mois.toString().padStart(2, '0')}/${annee}`;
+      dates.push(date);
+    }
+    return dates;
+  }
+
+  function genererTableau() {
+    const noms = ['Alice', 'Bob', 'Charlie', 'David', 'Emma', 'Francis', 'Gina', 'Hector', 'Isabelle', 'Jack'];
+    const datesAleatoires = genererDatesAleatoires();
+    const tableBody = document.getElementById('tableBody');
+
+    for (let i = 0; i < 10; i++) {
+      const newRow = document.createElement('tr');
+      const nomAleatoire = noms[Math.floor(Math.random() * noms.length)];
+      const dateAleatoire = datesAleatoires[i];
+
+      const nomCell = document.createElement('td');
+      nomCell.textContent = nomAleatoire;
+
+      const dateCell = document.createElement('td');
+      dateCell.textContent = dateAleatoire;
+
+      newRow.appendChild(nomCell);
+      newRow.appendChild(dateCell);
+
+      tableBody.appendChild(newRow);
+    }
+  }
+
+  // Générer le tableau au chargement de la page
+  genererTableau();
+</script>
+
+</body>
+</html>

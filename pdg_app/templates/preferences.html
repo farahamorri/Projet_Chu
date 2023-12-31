@@ -1,0 +1,28 @@
+<!-- templates/preferences.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Préférences et disponibilités</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Préférences et disponibilités</h1>
+
+    <table border="1">
+        <tr>
+            <th>Jour</th>
+            <th>Préférence</th>
+        </tr>
+        {% for preference in preferences %}
+            <tr>
+                <td>{{ preference.day }}</td>
+                <td>{{ preference.preference }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <a href="{{ url_for('auth.dashboard') }}">Retourner à votre tableau de bord</a>
+</body>
+</html>

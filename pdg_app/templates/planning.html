@@ -1,0 +1,29 @@
+<!-- planning.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Planning</title>
+</head>
+<body>
+    <div id="eventsList"></div>
+
+    <script>
+        // Supposons que tu récupères les données depuis ton backend et elles sont dans la variable "eventsData"
+        const eventsData = [
+            { summary: 'Événement 1', description: 'Description de l\'événement 1' },
+            { summary: 'Événement 2', description: 'Description de l\'événement 2' },
+            // ... Autres événements récupérés depuis l'API Google Calendar
+        ];
+
+        const eventsListDiv = document.getElementById('eventsList');
+
+        // Affichage des événements dans la page
+        eventsData.forEach(event => {
+            const eventDiv = document.createElement('div');
+            eventDiv.innerHTML = `<strong>${event.summary}</strong>: ${event.description}`;
+            eventsListDiv.appendChild(eventDiv);
+        });
+    </script>
+</body>
+</html>

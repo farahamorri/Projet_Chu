@@ -1,0 +1,29 @@
+<!-- templates/dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de bord</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Tableau de bord</h1>
+
+    <h2>Votre planning personnel</h2>
+    <ul>
+        {% for shift in personal_shifts %}
+            <li>{{ shift.date }} - {{ shift.shift_type }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Planning de votre service</h2>
+    <ul>
+        {% for shift in department_shifts %}
+            <li>{{ shift.date }} - {{ shift.shift_type }}</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ url_for('auth.preferences') }}">Vos disponibilités et préférences</a>
+</body>
+</html>
