@@ -2,7 +2,13 @@
 import enum
 from pdg_app import db
 from flask_login import UserMixin
+import hashlib
 
+#fonction hachage du mot de passe
+def hash_password(password):
+    # Utilisation de l'algorithme de hachage SHA-256
+    hashed_password = hashlib.sha256(password.encode()).hexdigest()
+    return hashed_password
 
 class DepartmentEnum(enum.Enum):
     cardiologie = 0
@@ -27,7 +33,7 @@ class Doctor(UserMixin, db.Model):
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
-        self.password = password
+        self.password = hash_password(password)
         self.department = department
 
     # Méthode requise pour Flask-Login
@@ -46,6 +52,7 @@ class PlanningMedecin(db.Model):
 class Preference(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     doctor_id = db.Column(db.Integer, db.ForeignKey('doctor.id'), nullable=False)
+    department = db.Column(db.Enum(DepartmentEnum), nullable=False)
     day = db.Column(db.Date, nullable=False)
     preference_garde = db.Column(db.Integer, nullable=False)  # 1: dispo, 0: pas arrangeant , -1: indisponible
     preference_astreinte = db.Column(db.Integer, nullable=False)  # 1: dispo, 0: pas arrangeant , -1: indisponible_
