@@ -87,7 +87,7 @@ print(b)
 """
 
 from pdg_app import db, create_app
-from pdg_app.models import Doctor, Planning
+from pdg_app.models import Doctor, PlanningMedecin
 from datetime import datetime, timedelta
 
 # Ta fonction de calcul d'identifiant
@@ -141,7 +141,7 @@ with app.app_context():
 
     for item in b:
         identifiant, date_formattee, id_medecin, prenom, nom, type_service = item
-        record = Planning(jour=identifiant, id_medecin=id_medecin)
+        record = PlanningMedecin(jour=identifiant, id_medecin=id_medecin)
         session.add(record)    
 
     session.commit()
