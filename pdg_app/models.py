@@ -35,7 +35,7 @@ class Doctor(UserMixin, db.Model):
         return str(self.id)
 
 
-class Planning(db.Model):
+class PlanningMedecin(db.Model):
     __tablename__ = 'planning_medecin'
 
     jour = db.Column(db.Integer, primary_key=True)
