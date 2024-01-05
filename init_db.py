@@ -2,7 +2,7 @@
 from pdg_app import db, create_app
 from pdg_app.models import Doctor
 from pdg_app.models import Preference
-from pdg_app.models import Planning
+from pdg_app.models import PlanningMedecin
 import logging as lg
 from datetime import datetime, timedelta
 
@@ -35,13 +35,13 @@ Session = db.sessionmaker(bind=db.engine)
 session = Session()
 
 for jour, id_medecin in enumerate(planning, start=1):
-    record = Planning(jour=jour, id_medecin=id_medecin)
+    record = PlanningMedecin(jour=jour, id_medecin=id_medecin)
     session.add(record)
 session.commit()
 
 result = (
-    session.query(Planning.jour, Doctor.first_name, Doctor.last_name)
-    .join(Doctor, Planning.id_medecin == Doctor.id)
+    session.query(PlanningMedecin.jour, Doctor.first_name, Doctor.last_name)
+    .join(Doctor, PlanningMedecin.id_medecin == Doctor.id)
     .all()
 )
 # Affichez les résultats
