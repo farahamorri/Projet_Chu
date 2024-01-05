@@ -6,7 +6,7 @@ app = create_app()
 # Utilisez l'application contexte pour accéder aux fonctionnalités de Flask-SQLAlchemy
 with app.app_context():
     # Importez vos modèles SQLAlchemy
-    from pdg_app.models import Doctor, Planning, Preference
+    from pdg_app.models import Doctor, PlanningMedecin, Preference
 
     # Initialisez l'inspecteur de la base de données
     inspector = db.inspect(db.engine)
@@ -19,7 +19,7 @@ with app.app_context():
     doctors = Doctor.query.all()
     for doctor in doctors:
         print(doctor.first_name, doctor.last_name)
-    plannings = Planning.query.all()
+    plannings = PlanningMedecin.query.all()
     for planning in plannings:
         print(planning.jour, planning.medecin)
     preferences = Preference.query.all()
